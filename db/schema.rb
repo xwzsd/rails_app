@@ -28,12 +28,11 @@ ActiveRecord::Schema.define(version: 20160824205103) do
 
   create_table "houses", force: :cascade do |t|
     t.integer  "house_number"
-    t.integer  "street_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
-  add_index "houses", ["house_number", "street_id"], name: "index_houses_on_house_number_and_street_id", using: :btree
+  add_index "houses", ["house_number"], name: "index_houses_on_house_number", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
@@ -46,12 +45,13 @@ ActiveRecord::Schema.define(version: 20160824205103) do
 
   create_table "streets", force: :cascade do |t|
     t.string   "street_name"
+    t.integer  "house_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "streets", ["street_name"], name: "index_streets_on_street_name", using: :btree
+  add_index "streets", ["street_name", "house_id"], name: "index_streets_on_street_name_and_house_id", using: :btree
 
-  add_foreign_key "houses", "streets"
   add_foreign_key "people", "houses"
+  add_foreign_key "streets", "houses"
 end

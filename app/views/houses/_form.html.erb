@@ -19,7 +19,18 @@
   <%= f.fields_for :custom_house do |builder| %>
     <%= render 'custom_house_fields', f: builder %>
   <% end %>
-  <%= link_to_add_custom_house "Add Custom Field", f, :custom_house %>
+  <%= link_to_add_custom_house "Add Custom Field", f, :custom_house %><br>
+  
+  <%= f.fields_for :person do |builder| %>
+    <%= render 'person_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_person "Add Person", f, :person %><br>
+
+  <%= f.fields_for :street do |builder| %>
+    <%= render 'street_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_street "Add Street", f, :street %><br>
+
 
   <div class="actions">
     <%= f.submit %>

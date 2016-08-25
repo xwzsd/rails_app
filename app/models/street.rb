@@ -1,3 +1,3 @@
 class Street < ActiveRecord::Base
-	has_many :house
+	belongs_to :house
 end

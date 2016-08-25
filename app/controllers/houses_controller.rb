@@ -4,8 +4,7 @@ class HousesController < ApplicationController
   # GET /houses
   # GET /houses.json
   def index
-    @houses = House.all
-    @custom_houses = CustomHouse.all
+    @houses = House.includes(:custom_house)
   end
 
   # GET /houses/1
@@ -70,6 +69,6 @@ class HousesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def house_params
-      params.require(:house).permit(:id, :house_number, custom_house_attributes: [ :id, :custom_name, :custom_value, :house_id, :_destroy ])
+      params.fetch(:house).permit(:id, :house_number, street_attributes: [:id, :street_name, :house_id, :_destroy], person_attributes: [:id, :name, :house_id, :_destroy], custom_house_attributes: [:id, :custom_name, :custom_value, :house_id, :_destroy])
     end
 end
