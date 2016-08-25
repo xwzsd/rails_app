@@ -1,0 +1,24 @@
+# Игнорирование конфига bundler
+/.bundle
+
+# Игнорирование дефолтной базы данных SQLite.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Игнорирование всех логов и временных файлов.
+/log/*
+/log/*.log
+/tmp
+
+/.ruby-gemset
+/.env
+
+# Игнорирование прочих ненужных файлов.
+database.yml
+doc/
+/public/uploads
+*.swp
+*~
+.DS_Store
+.idea
+.secret

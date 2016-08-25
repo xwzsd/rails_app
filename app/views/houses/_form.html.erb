@@ -1,0 +1,27 @@
+<%= form_for(@house) do |f| %>
+  <% if @house.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@house.errors.count, "error") %> prohibited this house from being saved:</h2>
+
+      <ul>
+      <% @house.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :house_number %><br>
+    <%= f.number_field :house_number %>
+  </div>
+
+  <%= f.fields_for :custom_house do |builder| %>
+    <%= render 'custom_house_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_custom_house "Add Custom Field", f, :custom_house %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
