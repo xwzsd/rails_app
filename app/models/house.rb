@@ -6,4 +6,5 @@ class House < ActiveRecord::Base
 	validates :house_number, 
           :presence => {:message => "Number can't be blank." },
           :length => { :maximum => 10, :message => "Must be less than 10 characters"}
+
 end

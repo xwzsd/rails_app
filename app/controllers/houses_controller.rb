@@ -4,7 +4,8 @@ class HousesController < ApplicationController
   # GET /houses
   # GET /houses.json
   def index
-    @houses = House.includes(:custom_house)
+    @houses = House.eager_load(:custom_house, :person, :street)
+    #@houses = House.preload(:custom_house)
   end
 
   # GET /houses/1
