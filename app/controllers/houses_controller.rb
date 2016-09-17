@@ -1,16 +1,19 @@
 class HousesController < ApplicationController
   before_action :set_house, only: [:show, :edit, :update, :destroy]
 
+
   # GET /houses
   # GET /houses.json
+
   def index
-    @houses = House.eager_load(:custom_house, :person, :street)
+    @houses = House.all
     #@houses = House.preload(:custom_house)
   end
 
   # GET /houses/1
   # GET /houses/1.json
   def show
+    
   end
 
   # GET /houses/new
@@ -70,6 +73,7 @@ class HousesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def house_params
-      params.fetch(:house).permit(:id, :house_number, street_attributes: [:id, :street_name, :house_id, :_destroy], person_attributes: [:id, :name, :house_id, :_destroy], custom_house_attributes: [:id, :custom_name, :custom_value, :house_id, :_destroy])
+      params.fetch(:house).permit(:id, :house_number, :person_id, :street_id, custom_fields: [], street_attributes: [:id, :street_name], people_attributes: [:id, :name, :house_id])
     end
+    
 end

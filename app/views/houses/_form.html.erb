@@ -10,27 +10,27 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :house_number %><br>
-    <%= f.number_field :house_number %>
-  </div>
-
-  <%= f.fields_for :custom_house do |builder| %>
-    <%= render 'custom_house_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_custom_house "Add Custom Field", f, :custom_house %><br>
   
-  <%= f.fields_for :person do |builder| %>
-    <%= render 'person_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_person "Add Person", f, :person %><br>
+  <%= f.label :house_number %><br>
+  <%= f.number_field :house_number %><br>
 
-  <%= f.fields_for :street do |builder| %>
-    <%= render 'street_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_street "Add Street", f, :street %><br>
+  <p>Outbuilding</p>
+ 
+  <%= f.text_field :custom_fields, multiple: true %>
 
+  <p>People</p>
+ <div class="person_fields">
+   <div class="field">
+    <%= collection_select(:house, :person_id, Person.all, :id, :name) %>
+   </div>
+ </div>
+
+  <p>Street</p>
+ <div class="street_fields">
+   <div class="field">
+    <%= collection_select(:house, :street_id, Street.all, :id, :street_name) %>
+   </div>
+ </div>
 
   <div class="actions">
     <%= f.submit %>

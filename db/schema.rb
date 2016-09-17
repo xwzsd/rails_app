@@ -11,28 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824205103) do
+ActiveRecord::Schema.define(version: 20160914064532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "custom_houses", force: :cascade do |t|
-    t.string   "custom_name"
-    t.string   "custom_value"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "house_id"
-  end
-
-  add_index "custom_houses", ["custom_name", "custom_value"], name: "index_custom_houses_on_custom_name_and_custom_value", using: :btree
-
   create_table "houses", force: :cascade do |t|
     t.integer  "house_number"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.text     "custom_fields", default: [],              array: true
+    t.integer  "street_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "houses", ["house_number"], name: "index_houses_on_house_number", using: :btree
+  add_index "houses", ["house_number"], name: "index_houses_on_house_number", unique: true, using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
@@ -41,17 +33,14 @@ ActiveRecord::Schema.define(version: 20160824205103) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "people", ["name"], name: "index_people_on_name", unique: true, using: :btree
+  add_index "people", ["name"], name: "index_people_on_name", using: :btree
 
   create_table "streets", force: :cascade do |t|
     t.string   "street_name"
-    t.integer  "house_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "streets", ["street_name", "house_id"], name: "index_streets_on_street_name_and_house_id", using: :btree
+  add_index "streets", ["street_name"], name: "index_streets_on_street_name", unique: true, using: :btree
 
-  add_foreign_key "people", "houses"
-  add_foreign_key "streets", "houses"
 end

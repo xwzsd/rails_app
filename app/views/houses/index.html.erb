@@ -5,23 +5,23 @@
 <table>
   <thead>
     <tr>
-      <th>House</th>
-      <th>Custom Name</th>
-      <th>Custom Value</th>
-      <th>Person Name</th>
-      <th>Street Name</th>
+      <th>Number</th>
+      <th>Outbuilding</th>
+      <th>People</th>
+      <th>Street</th>
+   
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @houses.find_each do |house| %>
+    <% @houses.each do |house| %>
         <tr>
           <td><%= house.house_number %></td>
-          <td><%= house.custom_house.collect(&:custom_name) %></td>
-          <td><%= house.custom_house.collect(&:custom_value) %></td>
-          <td><%= house.person.collect(&:name) %></td>
-          <td><%= house.street.collect(&:street_name) %></td>
+          <td><%= house.custom_fields %></td>
+          <td><%= house.person.name %></td>
+          <td><%= house.street.street_name%></td>
+                
           <td><%= link_to 'Show', house %></td>
           <td><%= link_to 'Edit', edit_house_path(house) %></td>
           <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New House', new_house_path %>
+<%= render '/shared/ref_new' %>

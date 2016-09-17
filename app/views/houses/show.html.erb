@@ -1,9 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>House Number:</strong>
+  <h4>House Number:</h4>
   <%= @house.house_number %>
 </p>
+
+<h4>Outbuilding</h4>
+  <% if @house.custom_fields.any? %>
+	  <ul>
+		<% @house.custom_fields.each do |custom_field| %>
+		<li><%= custom_field %></li>
+		<% end %>
+	  </ul>
+		<% else %>
+	  <p>none available</p>
+  <% end %>
+
+<h4>People</h4>
+<%= @house.person.name %>
+
+<h4>Street</h4>
+<%= @house.street.street_name %><br>
 
 
 <%= link_to 'Edit', edit_house_path(@house) %> |
